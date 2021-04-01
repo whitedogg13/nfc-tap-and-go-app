@@ -2,14 +2,20 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Button} from 'react-native-paper';
 
-function HomeScreen() {
+function HomeScreen(props) {
+  const {navigation} = props;
   return (
     <View style={styles.wrapper}>
       <View style={styles.wrapper}>
         <Text style={styles.bannerText}>Tap-And-Go</Text>
       </View>
       <View style={styles.bottom}>
-        <Button mode="contained" style={[styles.btn]}>
+        <Button
+          mode="contained"
+          style={[styles.btn]}
+          onPress={() => {
+            navigation.navigate('Tag');
+          }}>
           TAP
         </Button>
         <Button mode="contained" style={styles.btn}>
