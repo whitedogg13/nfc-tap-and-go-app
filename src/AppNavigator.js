@@ -5,7 +5,7 @@ import HomeScreen from './Screens/HomeScreen';
 
 const Stack = createStackNavigator();
 
-function App() {
+function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppNavigator;
