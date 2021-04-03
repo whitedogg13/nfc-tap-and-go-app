@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Button} from 'react-native-paper';
 import NfcManager from 'react-native-nfc-manager';
 
@@ -26,30 +26,28 @@ function HomeScreen(props) {
       return null;
     } else if (!hasNfc) {
       return (
-        <View style={styles.bottom}>
+        <View style={styles.wrapper}>
           <Text>You device doesn't support NFC</Text>
         </View>
       );
     } else if (!enabled) {
       return (
-        <View style={styles.bottom}>
+        <View style={styles.wrapper}>
           <Text>Your NFC is not enabled!</Text>
 
-          <Button
-            style={[styles.btn]}
+          <TouchableOpacity
             onPress={() => {
               NfcManager.goToNfcSetting();
             }}>
-            GO TO NFC SETTINGS
-          </Button>
+            <Text>GO TO NFC SETTINGS</Text>
+          </TouchableOpacity>
 
-          <Button
-            style={[styles.btn]}
+          <TouchableOpacity
             onPress={async () => {
               setEnabled(await NfcManager.isEnabled());
             }}>
-            CHECK AGAIN
-          </Button>
+            <Text>CHECK AGAIN</Text>
+          </TouchableOpacity>
         </View>
       );
     }
