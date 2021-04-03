@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Button} from 'react-native-paper';
-import NfcManager from 'react-native-nfc-manager';
+import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 
 function HomeScreen(props) {
   const {navigation} = props;
@@ -20,6 +20,17 @@ function HomeScreen(props) {
 
     checkNfc();
   }, []);
+
+  async function readNdef() {
+    try {
+      await NfcManager.requestTechnology(NfcTech.Ndef);
+      const tag = await NfcManager.getTag();
+      await NfcManager.cancelTechnologyRequest();
+      navigation.navigate('Tag', {tag});
+    } catch (ex) {
+      console.warn(ex);
+    }
+  }
 
   function renderNfcButtons() {
     if (hasNfc === null) {
@@ -58,7 +69,7 @@ function HomeScreen(props) {
           mode="contained"
           style={[styles.btn]}
           onPress={() => {
-            navigation.navigate('Tag');
+            readNdef();
           }}>
           TAP
         </Button>

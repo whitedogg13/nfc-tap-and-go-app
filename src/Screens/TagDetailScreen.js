@@ -1,10 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-function TagDetailScreen() {
+function TagDetailScreen(props) {
+  const {route} = props;
+  const tag = route.params;
   return (
     <View style={styles.wrapper}>
-      <Text>Tag Detail</Text>
+      <Text>{JSON.stringify(tag, null, 2)}</Text>
     </View>
   );
 }
