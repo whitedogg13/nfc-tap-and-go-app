@@ -28,7 +28,7 @@ function HomeScreen(props) {
       await NfcManager.cancelTechnologyRequest();
       navigation.navigate('Tag', {tag});
     } catch (ex) {
-      console.warn(ex);
+      // bypass
     }
   }
 
