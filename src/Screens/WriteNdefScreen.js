@@ -1,13 +1,28 @@
 import React from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
 import {Button, TextInput, Chip} from 'react-native-paper';
+import {Ndef} from 'react-native-nfc-manager';
 
 function WriteNdefScreen(props) {
   const [selectedLinkType, setSelectedLinkType] = React.useState('WEB');
   const [value, setValue] = React.useState('');
 
   async function writeNdef() {
-    console.warn(selectedLinkType, value);
+    let scheme = null;
+    if (selectedLinkType === 'WEB') {
+      scheme = 'https://';
+    } else if (selectedLinkType === 'TEL') {
+      scheme = 'tel:';
+    } else if (selectedLinkType === 'SMS') {
+      scheme = 'sms:';
+    } else if (selectedLinkType === 'EMAIL') {
+      scheme = 'mailto:';
+    } else {
+      throw new Error('no such type');
+    }
+    const uriRecord = Ndef.uriRecord(`${scheme}${value}`);
+    const bytes = Ndef.encodeMessage([uriRecord]);
+    console.warn(bytes);
   }
 
   return (
