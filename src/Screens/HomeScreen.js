@@ -73,7 +73,12 @@ function HomeScreen(props) {
           }}>
           TAP
         </Button>
-        <Button mode="contained" style={styles.btn}>
+        <Button
+          mode="contained"
+          style={styles.btn}
+          onPress={() => {
+            navigation.navigate('Write');
+          }}>
           LINK
         </Button>
       </View>
