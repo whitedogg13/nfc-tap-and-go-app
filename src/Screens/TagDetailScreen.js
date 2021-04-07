@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Linking} from 'react-native';
 import {Ndef} from 'react-native-nfc-manager';
 
 function TagDetailScreen(props) {
@@ -18,7 +18,16 @@ function TagDetailScreen(props) {
 
   return (
     <View style={styles.wrapper}>
-      {uri ? <Text>{uri}</Text> : <Text>{JSON.stringify(tag, null, 2)}</Text>}
+      {uri ? (
+        <TouchableOpacity
+          onPress={() => {
+            Linking.openURL(uri);
+          }}>
+          <Text>{uri}</Text>
+        </TouchableOpacity>
+      ) : (
+        <Text>{JSON.stringify(tag, null, 2)}</Text>
+      )}
     </View>
   );
 }
