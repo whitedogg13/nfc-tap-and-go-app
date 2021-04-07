@@ -7,7 +7,7 @@ function TagDetailScreen(props) {
   const {tag} = route.params;
   let uri = null;
 
-  if (tag.ndefMessage) {
+  if (tag.ndefMessage && tag.ndefMessage.length > 0) {
     const ndefRecord = tag.ndefMessage[0];
     if (ndefRecord.tnf === Ndef.TNF_WELL_KNOWN) {
       if (ndefRecord.type.every((b, i) => b === Ndef.RTD_BYTES_URI[i])) {
