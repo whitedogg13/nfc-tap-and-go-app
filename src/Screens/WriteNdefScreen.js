@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
 import {Button, TextInput, Chip} from 'react-native-paper';
-import {Ndef} from 'react-native-nfc-manager';
+import NfcManager, {Ndef, NfcTech} from 'react-native-nfc-manager';
 
 function WriteNdefScreen(props) {
   const [selectedLinkType, setSelectedLinkType] = React.useState('WEB');
@@ -23,6 +23,14 @@ function WriteNdefScreen(props) {
     const uriRecord = Ndef.uriRecord(`${scheme}${value}`);
     const bytes = Ndef.encodeMessage([uriRecord]);
     console.warn(bytes);
+
+    try {
+      await NfcManager.requestTechnology(NfcTech.Ndef);
+      await NfcManager.ndefHandler.writeNdefMessage(bytes);
+      await NfcManager.cancelTechnologyRequest();
+    } catch (ex) {
+      console.warn(ex);
+    }
   }
 
   return (
