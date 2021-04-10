@@ -1,4 +1,4 @@
-package com.tapandgo;
+package com.richiehsieh.tapandgo;
 
 import android.app.Application;
 import android.content.Context;

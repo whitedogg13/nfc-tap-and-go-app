@@ -1,4 +1,4 @@
-package com.tapandgo;
+package com.richiehsieh.tapandgo;
 
 import com.facebook.react.ReactActivity;
 
