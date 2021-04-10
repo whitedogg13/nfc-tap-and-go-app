@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Linking,
-  Alert,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Linking} from 'react-native';
 import {Button} from 'react-native-paper';
 import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 
@@ -31,8 +24,7 @@ function HomeScreen(props) {
   React.useEffect(() => {
     function handleUrl(url) {
       if (url) {
-        // Alert.alert('URL', url, [{text: 'OK'}]);
-        navigation.navigate('DeepLinking', {msg: url.split('://')[1]});
+        console.warn(url);
       }
     }
 
