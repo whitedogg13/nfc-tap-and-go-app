@@ -68,7 +68,7 @@ function AndroidPrompt(props, ref) {
         />
 
         <Animated.View style={[styles.prompt, promptAnimStyle]}>
-          <Text style={styles.hint}>{hintText || 'Hello NFC'}</Text>
+          <Text style={styles.hint}>{hintText || 'Ready to Scan NFC'}</Text>
 
           <TouchableOpacity
             style={styles.btn}
