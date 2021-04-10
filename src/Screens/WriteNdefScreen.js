@@ -27,9 +27,10 @@ function WriteNdefScreen(props) {
     try {
       await NfcManager.requestTechnology(NfcTech.Ndef);
       await NfcManager.ndefHandler.writeNdefMessage(bytes);
-      await NfcManager.cancelTechnologyRequest();
     } catch (ex) {
-      console.warn(ex);
+      // bypass
+    } finally {
+      NfcManager.cancelTechnologyRequest();
     }
   }
 

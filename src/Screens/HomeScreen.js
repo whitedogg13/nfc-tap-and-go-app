@@ -45,10 +45,11 @@ function HomeScreen(props) {
     try {
       await NfcManager.requestTechnology(NfcTech.Ndef);
       const tag = await NfcManager.getTag();
-      await NfcManager.cancelTechnologyRequest();
       navigation.navigate('Tag', {tag});
     } catch (ex) {
       // bypass
+    } finally {
+      NfcManager.cancelTechnologyRequest();
     }
   }
 
