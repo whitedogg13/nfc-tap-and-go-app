@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Linking} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Button} from 'react-native-paper';
 import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 
@@ -20,26 +20,6 @@ function HomeScreen(props) {
 
     checkNfc();
   }, []);
-
-  React.useEffect(() => {
-    function handleUrl(url) {
-      if (url) {
-        console.warn(url);
-      }
-    }
-
-    Linking.getInitialURL().then(url => {
-      handleUrl(url);
-    });
-
-    Linking.addEventListener('url', event => {
-      handleUrl(event.url);
-    });
-
-    return () => {
-      Linking.removeAllListeners('url');
-    };
-  }, [navigation]);
 
   async function readNdef() {
     try {
