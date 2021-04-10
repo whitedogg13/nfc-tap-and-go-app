@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {View, StyleSheet, SafeAreaView, Platform} from 'react-native';
 import {Button, TextInput, Chip} from 'react-native-paper';
 import NfcManager, {Ndef, NfcTech} from 'react-native-nfc-manager';
 import AndroidPrompt from '../Components/AndroidPrompt';
@@ -27,14 +27,18 @@ function WriteNdefScreen(props) {
     console.warn(bytes);
 
     try {
-      androidPromptRef.current.setVisible(true);
+      if (Platform.OS === 'android') {
+        androidPromptRef.current.setVisible(true);
+      }
       await NfcManager.requestTechnology(NfcTech.Ndef);
       await NfcManager.ndefHandler.writeNdefMessage(bytes);
     } catch (ex) {
       // bypass
     } finally {
       NfcManager.cancelTechnologyRequest();
-      androidPromptRef.current.setVisible(false);
+      if (Platform.OS === 'android') {
+        androidPromptRef.current.setVisible(false);
+      }
     }
   }
 

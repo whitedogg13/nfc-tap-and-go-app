@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 import {Button} from 'react-native-paper';
 import NfcManager, {NfcTech} from 'react-native-nfc-manager';
 import AndroidPrompt from '../Components/AndroidPrompt';
@@ -25,7 +25,9 @@ function HomeScreen(props) {
 
   async function readNdef() {
     try {
-      androidPromptRef.current.setVisible(true);
+      if (Platform.OS === 'android') {
+        androidPromptRef.current.setVisible(true);
+      }
       await NfcManager.requestTechnology(NfcTech.Ndef);
       const tag = await NfcManager.getTag();
       navigation.navigate('Tag', {tag});
@@ -33,7 +35,9 @@ function HomeScreen(props) {
       // bypass
     } finally {
       NfcManager.cancelTechnologyRequest();
-      androidPromptRef.current.setVisible(false);
+      if (Platform.OS === 'android') {
+        androidPromptRef.current.setVisible(false);
+      }
     }
   }
 
